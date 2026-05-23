@@ -1,2 +1,8 @@
-# statbot-pro
-AI-powered autonomous CSV data analyst that generates insights, visualizations, and Pandas-based analysis from natural language queries.
+## Visualization Module
+
+Features:
+- Interactive charts
+- Trend analysis
+- Missing value analysis
+- Correlation analysis
+- Dynamic graph generation
