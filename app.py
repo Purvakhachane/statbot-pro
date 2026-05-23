@@ -92,7 +92,7 @@ if uploaded_file is not None:
     with open(file_path, "wb") as f:
         f.write(uploaded_file.getbuffer())
 
-    st.success("✅ File uploaded successfully!")
+    st.success("File uploaded successfully!")
 
     try:
 
@@ -101,7 +101,7 @@ if uploaded_file is not None:
 
         # ---------------- PREVIEW ---------------- #
 
-        st.subheader(" Dataset Preview")
+        st.subheader("Dataset Preview")
 
         st.dataframe(
             df.head(),
@@ -137,7 +137,7 @@ if uploaded_file is not None:
 
         # ---------------- DATA TYPES ---------------- #
 
-        st.subheader(" Dataset Information")
+        st.subheader("Dataset Information")
 
         st.write(df.dtypes)
 
@@ -212,7 +212,7 @@ if uploaded_file is not None:
 
         # ---------------- AI QUERY SECTION ---------------- #
 
-        st.subheader(" Ask Questions About Dataset")
+        st.subheader("Ask Questions About Dataset")
 
         user_query = st.text_input(
             "Example: Show highest sales region"
@@ -249,5 +249,5 @@ if uploaded_file is not None:
     except Exception as e:
 
         st.error(
-            f"❌ Error reading file: {e}"
+            f"Error reading file: {e}"
         )
