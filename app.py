@@ -2,10 +2,8 @@ import streamlit as st
 
 from utils.file_handler import save_uploaded_file
 from utils.data_preview import load_csv
-from utils.visualization import generate_chart
 
-# Page title
-st.title("StatBot Pro - CSV Data Analyst")
+st.title("StatBot Pro - Dataset Preview")
 
 # File uploader
 uploaded_file = st.file_uploader(
@@ -13,24 +11,26 @@ uploaded_file = st.file_uploader(
     type=["csv"]
 )
 
+# ---------------- MAIN PROCESS ---------------- #
+
 # Check if file uploaded
 if uploaded_file is not None:
 
     try:
-        # Save uploaded file
+        # Save file
         file_path = save_uploaded_file(uploaded_file)
 
-        st.success("File uploaded successfully!")
+    st.success("File uploaded successfully!")
 
-        # Load CSV data
+        # Load CSV
         df = load_csv(file_path)
 
         # Dataset preview section
         st.subheader("Dataset Preview")
 
+        # Show first 5 rows
         st.dataframe(df.head())
 
-        # Dataset information
         st.write("Rows:", df.shape[0])
         st.write("Columns:", df.shape[1])
 
@@ -78,5 +78,4 @@ if uploaded_file is not None:
             st.image(chart_path)
 
     except Exception as e:
-
         st.error(f"Error: {e}")
