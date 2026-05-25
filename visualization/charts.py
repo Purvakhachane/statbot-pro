@@ -1,13 +1,34 @@
 import matplotlib.pyplot as plt
 import pandas as pd
+import seaborn as sns
+import streamlit as st
 
+# Bar Chart
 def create_bar_chart(df, x_col, y_col):
-    plt.figure(figsize=(8,5))
-    plt.bar(df[x_col], df[y_col])
 
+    fig, ax = plt.subplots(figsize=(8,5))
 
-    plt.xlabel(x_col)
-    plt.ylabel(y_col)
-    plt.title(f"{y_col} by {x_col}")
+    ax.bar(df[x_col], df[y_col])
 
-    plt.show()
+    ax.set_xlabel(x_col)
+    ax.set_ylabel(y_col)
+
+    ax.set_title(f"{y_col} by {x_col}")
+
+    st.pyplot(fig)
+
+# Heatmap
+def create_heatmap(df):
+
+    corr = df.corr(numeric_only=True)
+
+    fig, ax = plt.subplots(figsize=(8,6))
+
+    sns.heatmap(
+        corr,
+        annot=True,
+        cmap="Blues",
+        ax=ax
+    )
+
+    st.pyplot(fig)

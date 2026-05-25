@@ -1,8 +1,7 @@
 ## Visualization Module
 
-Features:
 - Interactive charts
 - Trend analysis
+- Correlation heatmaps
 - Missing value analysis
-- Correlation analysis
 - Dynamic graph generation
