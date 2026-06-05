@@ -1,17 +1,19 @@
-from analysis.aggregation import (perform_aggregation, group_by_analysis)
+from analysis.aggregation import (
+    perform_aggregation,
+    group_by_analysis
+)
 
-from analysis.basic_analysis import (get_dataset_overview, get_numerical_summary)
+from analysis.basic_analysis import (
+    get_dataset_overview,
+    get_numerical_summary
+)
+
 
 from analysis.filtering import apply_filter
 
-
 def execute_query(df, parsed_query):
-    operation = parsed_query.get("operation")
-    column = parsed_query.get("column")
-    condition = parsed_query.get("condition")
-    value = parsed_query.get("value")
-    group_by = parsed_query.get("group_by")
 
+    operation = parsed_query.get("operation")
     try:
         # Dataset Overview
         if operation == "overview":
@@ -21,7 +23,7 @@ def execute_query(df, parsed_query):
         elif operation == "summary":
             return get_numerical_summary(df)
 
-        # Aggregation Operations
+        # Aggregations
         elif operation in [
             "sum",
             "mean",
@@ -31,23 +33,47 @@ def execute_query(df, parsed_query):
             "median",
             "std"
         ]:
-            return perform_aggregation(df, operation, column)
+
+            column = parsed_query.get("column")
+            if not column:
+                return "Column name is required."
+
+            return perform_aggregation(
+                df,
+                operation,
+                column
+            )
 
         # Group By Analysis
         elif operation == "groupby":
+            group_by = parsed_query.get("group_by")
+            column = parsed_query.get("column")
+            aggregation = parsed_query.get(
+                "aggregation",
+                "sum"
+            )
+
             return group_by_analysis(
                 df,
                 group_by,
                 column,
-                parsed_query.get("aggregation", "sum")
+                aggregation
             )
 
         # Filtering
         elif operation == "filter":
-            return apply_filter(df, column, condition, value)
+            return apply_filter(
+                df,
+                parsed_query.get("column"),
+                parsed_query.get("condition"),
+                parsed_query.get("value")
+            )
 
-        else:
-            return f"Unsupported operation '{operation}'"
+        return f"Unsupported operation: {operation}"
 
-    except Exception as e:
-        return f"Execution Error: {str(e)}"
+    except Exception as error:
+
+        return {
+            "status": "error",
+            "message": str(error)
+        }
