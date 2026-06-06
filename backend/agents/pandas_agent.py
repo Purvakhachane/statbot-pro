@@ -8,22 +8,17 @@ from analysis.basic_analysis import (
     get_numerical_summary
 )
 
-
 from analysis.filtering import apply_filter
 
 def execute_query(df, parsed_query):
-
     operation = parsed_query.get("operation")
     try:
-        # Dataset Overview
         if operation == "overview":
             return get_dataset_overview(df)
-
-        # Numerical Summary
+        
         elif operation == "summary":
             return get_numerical_summary(df)
 
-        # Aggregations
         elif operation in [
             "sum",
             "mean",
@@ -35,8 +30,18 @@ def execute_query(df, parsed_query):
         ]:
 
             column = parsed_query.get("column")
+
             if not column:
-                return "Column name is required."
+                return {
+                    "status": "error",
+                    "message": "Column name is required."
+                }
+
+            if column not in df.columns:
+                return {
+                    "status": "error",
+                    "message": f"Column '{column}' not found."
+                }
 
             return perform_aggregation(
                 df,
@@ -44,14 +49,27 @@ def execute_query(df, parsed_query):
                 column
             )
 
-        # Group By Analysis
         elif operation == "groupby":
+
             group_by = parsed_query.get("group_by")
             column = parsed_query.get("column")
+
             aggregation = parsed_query.get(
                 "aggregation",
                 "sum"
             )
+
+            if group_by not in df.columns:
+                return {
+                    "status": "error",
+                    "message": f"Group column '{group_by}' not found."
+                }
+
+            if column not in df.columns:
+                return {
+                    "status": "error",
+                    "message": f"Column '{column}' not found."
+                }
 
             return group_by_analysis(
                 df,
@@ -60,19 +78,29 @@ def execute_query(df, parsed_query):
                 aggregation
             )
 
-        # Filtering
         elif operation == "filter":
+
+            column = parsed_query.get("column")
+
+            if column not in df.columns:
+                return {
+                    "status": "error",
+                    "message": f"Column '{column}' not found."
+                }
+
             return apply_filter(
                 df,
-                parsed_query.get("column"),
+                column,
                 parsed_query.get("condition"),
                 parsed_query.get("value")
             )
 
-        return f"Unsupported operation: {operation}"
+        return {
+            "status": "error",
+            "message": f"Unsupported operation '{operation}'"
+        }
 
     except Exception as error:
-
         return {
             "status": "error",
             "message": str(error)

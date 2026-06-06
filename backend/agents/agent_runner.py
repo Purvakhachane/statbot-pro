@@ -8,6 +8,7 @@ def run_agent(df, user_query):
     try:
         parsed_query = interpret_query(user_query)
         attempt = 0
+
         while attempt < MAX_RETRIES:
             result = execute_query(df, parsed_query)
 
@@ -34,7 +35,9 @@ def run_agent(df, user_query):
 
         return {
             "status": "error",
-            "message": "Maximum retry limit reached."
+            "message": "Unable to answer the query using the uploaded dataset.",
+            "available_columns": list(df.columns),
+            "attempts": MAX_RETRIES
         }
 
     except Exception as error:
