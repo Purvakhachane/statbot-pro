@@ -10,7 +10,8 @@ from visualization import (
     create_bar_chart,
     create_histogram,
     create_line_chart,
-    create_scatter_chart
+    create_scatter_chart,
+    create_pie_chart
 )
 
 from insights import (
@@ -83,7 +84,8 @@ if uploaded_file is not None:
                 "Histogram",
                 "Bar Chart",
                 "Line Chart",
-                "Scatter Chart"
+                "Scatter Chart",
+                "Pie Chart"
             ]
         )
 
@@ -134,6 +136,15 @@ if uploaded_file is not None:
 
             st.pyplot(fig)
 
+        elif chart_type == "Pie Chart":
+
+    fig = create_pie_chart(
+        df,
+        col_x
+    )
+
+    st.pyplot(fig)
+    
         elif chart_type == "Scatter Chart":
 
             fig = create_scatter_chart(
