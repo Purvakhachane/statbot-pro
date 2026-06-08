@@ -74,7 +74,25 @@ if uploaded_file is not None:
             "Numeric Columns",
             len(df.select_dtypes(include="number").columns)
         )
+    # ================= DATASET HEALTH REPORT =================
 
+st.subheader("🏥 Dataset Health Report")
+
+duplicate_rows = df.duplicated().sum()
+
+numeric_cols = len(
+    df.select_dtypes(include='number').columns
+)
+
+categorical_cols = len(
+    df.select_dtypes(include='object').columns
+)
+
+st.success(f"Duplicate Rows: {duplicate_rows}")
+
+st.info(f"Numeric Columns: {numeric_cols}")
+
+st.info(f"Categorical Columns: {categorical_cols}")
         # ================= VISUALIZATION =================
         st.subheader("📈 Visualization Module")
 
