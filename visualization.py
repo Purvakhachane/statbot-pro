@@ -30,7 +30,25 @@ def create_line_chart(df, x_col, y_col):
     ax.set_ylabel(y_col)
     return fig
 
+# Pie chart
+def create_pie_chart(df, column):
 
+    import matplotlib.pyplot as plt
+
+    data = df[column].value_counts()
+
+    fig, ax = plt.subplots(figsize=(6,6))
+
+    ax.pie(
+        data.values,
+        labels=data.index,
+        autopct='%1.1f%%'
+    )
+
+    ax.set_title(f"{column} Distribution")
+
+    return fig
+    
 # Scatter Chart (NEW ADDITION - missing earlier)
 def create_scatter_chart(df, x_col, y_col):
     fig, ax = plt.subplots()
