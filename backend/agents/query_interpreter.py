@@ -10,7 +10,10 @@ Convert the user query into JSON format.
 
 Allowed operations:
 overview
+sample_data
 summary
+null_percentage
+unique_values
 sum
 mean
 max
@@ -20,6 +23,7 @@ median
 std
 filter
 groupby
+correlation_matrix
 
 Rules:
 1. Return ONLY JSON.
@@ -49,6 +53,50 @@ Count all rows
 Output:
 {{
     "operation": "count"
+}}
+
+User:
+Show sample data
+Output:
+{{
+    "operation": "sample_data"
+
+}}
+
+User:
+Show missing value percentage
+Output:
+{{
+    "operation": "null_percentage"
+}}
+
+User:
+Show unique values in Region
+Output:
+{{
+    "operation": "unique_values",
+    "column": "Region"
+}}
+
+User:
+Show correlation matrix
+Output:
+{{
+    "operation": "correlation_matrix"
+}}
+
+User:
+Find relationships between numeric columns
+Output:
+{{
+    "operation": "correlation_matrix"
+}}
+
+User:
+Which columns are strongly correlated?
+Output:
+{{
+    "operation": "correlation_matrix"
 }}
 
 User:

@@ -34,6 +34,7 @@ Rules:
 2. Keep the original intent.
 3. Use only available columns.
 4. Do not explain anything.
+5. Use a valid operation supported by the system.
 """
 
     response = model.invoke(prompt)
