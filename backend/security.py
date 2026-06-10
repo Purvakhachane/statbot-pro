@@ -39,9 +39,9 @@ def validate_query(user_query):
                 "message": f"Blocked keyword detected: {keyword}"
             }
 
-    return {
-        "status": "success"
-    }
+        return {
+            "status": "success"
+        }
 
     def log_blocked_query(query):
 

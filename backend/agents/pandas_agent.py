@@ -1,9 +1,9 @@
-from analysis.aggregation import (
+from backend.analysis.aggregation import (
     perform_aggregation,
     group_by_analysis
 )
 
-from analysis.basic_analysis import (
+from backend.analysis.basic_analysis import (
     get_dataset_overview,
     get_sample_data,
     get_numerical_summary,
@@ -12,7 +12,7 @@ from analysis.basic_analysis import (
     get_correlation_matrix
 )
 
-from analysis.filtering import apply_filter
+from backend.analysis.filtering import apply_filter
 
 def execute_query(df, parsed_query):
     operation = parsed_query.get("operation")
