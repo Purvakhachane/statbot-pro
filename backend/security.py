@@ -15,14 +15,12 @@ BLOCKED_KEYWORDS = [
 def validate_query(user_query):
 
     if not user_query.strip():
-
         return {
             "status": "error",
             "message": "Empty query is not allowed."
         }
 
     if len(user_query) > 1000:
-
         return {
             "status": "error",
             "message": "Query exceeds maximum length."
@@ -34,6 +32,8 @@ def validate_query(user_query):
 
         if keyword in query:
 
+            log_blocked_query(query)
+
             return {
                 "status": "error",
                 "message": f"Blocked keyword detected: {keyword}"
@@ -43,7 +43,8 @@ def validate_query(user_query):
         "status": "success"
     }
 
-    def log_blocked_query(query):
+
+def log_blocked_query(query):
 
     with open(
         "security_log.txt",
@@ -51,15 +52,4 @@ def validate_query(user_query):
         encoding="utf-8"
     ) as file:
 
-        file.write(
-            query + "\n"
-        )
-
-        if keyword in query:
-
-    log_blocked_query(query)
-
-    return {
-        "status": "error",
-        "message": f"Blocked keyword detected: {keyword}"
-    }
+        file.write(query + "\n")
