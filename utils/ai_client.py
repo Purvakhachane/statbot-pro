@@ -1,7 +1,7 @@
 # utils/ai_client.py
 
 def process_query(query):
-
+    print("AI_CLIENT PROCESS_QUERY CALLED")
     query = query.lower()
 
     if "highest" in query or "max" in query:

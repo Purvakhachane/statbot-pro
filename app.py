@@ -2,6 +2,10 @@ import streamlit as st
 
 from auth import show_auth
 from main_dashboard import show_dashboard
+import sys
+import os
+
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 # ---------------- PAGE CONFIG ---------------- #
 
