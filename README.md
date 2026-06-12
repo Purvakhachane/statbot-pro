@@ -144,34 +144,8 @@ statbot-pro/
 
 ---
 
-## 🎯 Current Progress
-
-✅ CSV Upload System
-
-✅ Dataset Preview
-
-✅ Query Mapping
-
-✅ Query Parsing
-
-✅ Dataframe Analysis
-
-✅ Interactive Dashboard
-
-✅ Visualization Module
-
-🚧 AI Agent Integration
-
-🚧 Advanced Analytics
-
-🚧 Report Generation
-
----
-
 ## 🔮 Future Enhancements
 
-* AI-powered insights
-* Smart chart recommendations
 * Conversational data analysis
 * Automated report generation
 * Export to PDF/Excel
